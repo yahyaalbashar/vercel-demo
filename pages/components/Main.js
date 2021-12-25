@@ -5,6 +5,8 @@ import axios from 'axios';
 
 
 const  Main =(props)=> {
+    const getDataUrl=`${process.env.NEXT_PUBLIC_API}api/v1/things`;
+    const [thingsList, setThingsList] =useState([]);
     useEffect(()=>{
         const config={
             headers:{
@@ -16,8 +18,8 @@ const  Main =(props)=> {
             console.log(thingsList);
         })
     },[getDataUrl,thingsList,props.token]);
-    const getDataUrl=`${process.env.NEXT_PUBLIC_API}api/v1/things`
-    const [thingsList, setThingsList] =useState([])
+    
+    
 
     return (
         <div>
