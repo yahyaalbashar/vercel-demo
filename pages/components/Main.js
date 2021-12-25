@@ -1,0 +1,32 @@
+import React from 'react';
+import { useEffect, useState } from 'react';
+import Item from './Item';
+import axios from 'axios';
+
+
+const  Main =(props)=> {
+    useEffect(()=>{
+        const config={
+            headers:{
+                "Authorization": `Bearer ${props.token}`
+            }
+        }
+        axios.get(getDataUrl,config).then(data=>{
+            setThingsList(data.data);
+            console.log(thingsList);
+        })
+    },[getDataUrl,thingsList,props.token]);
+    const getDataUrl=`${process.env.NEXT_PUBLIC_API}api/v1/things`
+    const [thingsList, setThingsList] =useState([])
+
+    return (
+        <div>
+            <h1>Things list</h1>
+            {thingsList.map(item=>{
+                return <Item key={item.id} name={item.name} owner={item.owner}/>
+            })}
+        </div>
+    )
+}
+
+export default Main
